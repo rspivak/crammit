@@ -29,6 +29,13 @@ the git master branch:
 
     $ [sudo] pip install git+https://github.com/rspivak/crammit.git#egg=crammit
 
+To install in development mode
+
+::
+
+    $ git clone https://github.com/rspivak/crammit.git
+    $ python setup.py develop
+
 License
 -------
 The MIT License (MIT)
