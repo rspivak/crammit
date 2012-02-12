@@ -71,6 +71,7 @@ Here is a sample configuration file.
 
 Every bundle will output 3 files. Let's check out the output of
 the javacscript 'common' bundle.
+
 - common-{sha1}.js - concatenated original files
 - common-{sha1}.min.js - concatenated and minified files
 - common-{sha1}.min.js.gz - concatenated, minified, and gzipped files
