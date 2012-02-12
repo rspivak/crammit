@@ -1,0 +1,8 @@
+div {
+  background: url(listremove.png) 100% 0 repeat-x #ddd;
+}
+
+a {
+  background-color: #ddd;
+  background-image: url(listremove.png);
+}
