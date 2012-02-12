@@ -73,11 +73,11 @@ Here is a sample configuration file.
 Information file
 ----------------
 Crammit produces a bundle information file in {output}/assetsinfo.yaml
-that holds information about all bundles.
+that contains different details about all generated bundles.
 The information includes SHA1 fingerprint (if enabled) for a bundle,
 output file names and their corresponding sizes in bytes.
 
-- *raw* - concatenated files
+- *raw* - concatenated original files
 - *min* - minifed files
 - *gz* - gzipped files
 
