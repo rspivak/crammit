@@ -1,5 +1,5 @@
 Change History
 ==============
-0.1 (2012-02-11)
+0.2 (2012-02-12)
 ----------------
-- Initial public release
+- Public release
