@@ -1,0 +1,18 @@
+output_path: assets  # directory path relative to the current directory
+minify_assets: true  # default is true
+gzip_assets: true    # default is true
+
+javascript:
+  # 'common' is a bundle name
+  # output file will have prefix 'common'
+  common:
+    # paths are relative to the current directory
+    - static/js/app/screen.js
+    # you can use Unix shell-style wildcards
+    - static/js/vendor/*.js
+  utils:
+    - static/js/utils/*.js
+
+css:
+  common:
+    - static/css/*.css
