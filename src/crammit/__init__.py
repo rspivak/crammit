@@ -92,7 +92,7 @@ class AssetManager(object):
         buffer = StringIO.StringIO()
         with gzip.GzipFile(fileobj=buffer, mode='wb',
                            compresslevel=compresslevel) as fout:
-            fout.write(minified_data)
+            fout.write(data)
         return buffer.getvalue()
 
     def _process_bundle(self, name, paths, type):
