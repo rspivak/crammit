@@ -71,3 +71,25 @@ class AssetManagerTestCase(unittest.TestCase):
             util_files
             )
 
+    def test_css_bundles(self):
+        import yaml
+        config = yaml.load("""
+        css:
+          common:
+            - static/css/*.css
+        """)
+        basedir = os.path.dirname(os.path.abspath(__file__))
+        manager = self._makeOne(config, basedir)
+        bundles = manager.get_bundles()['css']
+        # Verify that we have 1 CSS bundle
+        self.assertEquals(len(bundles), 1)
+        self.assertTrue('common' in bundles)
+
+        common_files = bundles['common']
+        self.assertEqual(
+            sorted([
+                os.path.join(basedir, 'static/css/test1.css'),
+                os.path.join(basedir, 'static/css/test2.css'),
+                ]),
+            sorted(common_files)
+            )
