@@ -25,7 +25,7 @@ setup(
     author_email='ruslan.spivak@gmail.com',
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    install_requires=['slimit', 'cssmin'],
+    install_requires=['slimit', 'cssmin', 'PyYAML'],
     zip_safe=False,
     entry_points="""\
     [console_scripts]
