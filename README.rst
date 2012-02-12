@@ -69,6 +69,11 @@ Here is a sample configuration file.
         # you can use Unix shell-style wildcards in file names
         - static/css/*.css
 
+Every bundle will output 3 files. Let's check out the output of
+the javacscript 'common' bundle.
+- common-{sha1}.js - concatenated original files
+- common-{sha1}.min.js - concatenated and minified files
+- common-{sha1}.min.js.gz - concatenated, minified, and gzipped files
 
 Information file
 ----------------
@@ -77,9 +82,9 @@ that contains different details about all generated bundles.
 The information includes SHA1 fingerprint (if enabled) for a bundle,
 output file names and their corresponding sizes in bytes.
 
-- *raw* - concatenated original files
-- *min* - minifed files
-- *gz* - gzipped files
+- *raw* - concatenated
+- *min* - concatenated and minified
+- *gz* - concatenated, minified, and gzipped
 
 ::
 
