@@ -54,18 +54,17 @@ Here is a sample configuration file.
     fingerprint: true    # add sha1 hash to the output file name
 
     javascript:
-      # 'common' is a bundle name
-      # output file will have prefix 'common'
+      # 'common' is a bundle name, output file will have prefix 'common'
       common:
-        # paths are relative to the current directory
         - static/js/application.js
-        # you can use Unix shell-style wildcards in file names
         - static/js/vendor/*.js
       utils:
+        # paths are relative to the current directory
         - static/js/utils.js
 
     css:
       base:
+        # you can use Unix shell-style wildcards in file names
         - static/css/*.css
 
 
