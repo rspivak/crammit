@@ -70,12 +70,8 @@ Here is a sample configuration file.
         - static/css/*.css
 
 
-- **output** - specifies relative path of an output directory where all
-generated files will be put.
-- **fingerprint** - either true or false. If true then SHA1 hash will be
-added to output bundle file names. The hash is calculated on
-concatenated original files before minification and gzip compression
-is applied.
+- **output** - specifies relative path of an output directory where allgenerated files will be put.
+- **fingerprint** - either true or false. If true then SHA1 hash will be added to output bundle file names. The hash is calculated on concatenated original files before minification and gzip compressionis applied.
 
 Every bundle will output 3 files. Let's check out the output of
 the javascript *common* bundle.
