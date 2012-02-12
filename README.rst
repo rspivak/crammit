@@ -42,6 +42,77 @@ Put it through its paces
 
     $ crammit -c assets.yaml
 
+Configuration
+-------------
+
+Use YAML file to configure Crammit.
+Here is a sample configuration file.
+
+::
+
+    output: assets       # directory path relative to the current directory
+    fingerprint: true    # add sha1 hash to the output file name
+
+    javascript:
+      # 'common' is a bundle name
+      # output file will have prefix 'common'
+      common:
+        # paths are relative to the current directory
+        - static/js/application.js
+        # you can use Unix shell-style wildcards in file names
+        - static/js/vendor/*.js
+      utils:
+        - static/js/utils.js
+
+    css:
+      base:
+        - static/css/*.css
+
+
+Information file
+----------------
+Crammit produces a bundle information file in {output}/assetsinfo.yaml
+::
+
+    css:
+      base:
+        fingerprint: 71fe4cba05a1a51023c6af4c4abf9c47ab21e357
+        output:
+          gz: base-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.min.css.gz
+          min: base-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.min.css
+          raw: base-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.css
+        size:
+          gz: 108
+          min: 235
+          raw: 277
+    javascript:
+      common:
+        fingerprint: 6493b619c73c49ce1f4dfe2c31d41902e98acaee
+        output:
+          gz: common-6493b619c73c49ce1f4dfe2c31d41902e98acaee.min.js.gz
+          min: common-6493b619c73c49ce1f4dfe2c31d41902e98acaee.min.js
+          raw: common-6493b619c73c49ce1f4dfe2c31d41902e98acaee.js
+        size:
+          gz: 56
+          min: 41
+          raw: 50
+      utils:
+        fingerprint: c3ef63280b954d99e8b13fc11ea3031caee77f1a
+        output:
+          gz: utils-c3ef63280b954d99e8b13fc11ea3031caee77f1a.min.js.gz
+          min: utils-c3ef63280b954d99e8b13fc11ea3031caee77f1a.min.js
+          raw: utils-c3ef63280b954d99e8b13fc11ea3031caee77f1a.js
+        size:
+          gz: 42
+          min: 22
+          raw: 24
+
+Acknowledgments
+---------------
+- CSS minification - `cssmin <https://github.com/zacharyvoase/cssmin>`_
+- Stole nice idea of bundle information file - `Squeezeit <https://github.com/samarudge/Squeezeit>`_
+- JavaScript minifier - `SlimIt <https://github.com/rspivak/slimit>`_
+
 License
 -------
 The MIT License (MIT)

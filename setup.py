@@ -20,7 +20,8 @@ setup(
     version='0.2',
     url='https://github.com/rspivak/crammit.git',
     license='MIT',
-    description='Crammit - CSS/JavaScript minifier. Asset packaging library',
+    description=('Asset packaging library. '
+                 'Concatenates, Minifies, and Compresses CSS and JavaScript'),
     author='Ruslan Spivak',
     author_email='ruslan.spivak@gmail.com',
     packages=find_packages('src'),
