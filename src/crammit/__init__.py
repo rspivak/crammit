@@ -87,6 +87,14 @@ class AssetManager(object):
 
         return bundles
 
+    def _compress(self, data):
+        compresslevel = 9 # max
+        buffer = StringIO.StringIO()
+        with gzip.GzipFile(fileobj=buffer, mode='wb',
+                           compresslevel=compresslevel) as fout:
+            fout.write(minified_data)
+        return buffer.getvalue()
+
     def _process_bundle(self, name, paths, type):
         sha1, sep = '', ''
         raw_data = ''.join(open(path).read() for path in paths)
@@ -108,12 +116,7 @@ class AssetManager(object):
         minifed_fname = fname_template.format(suffix='.min', gz='')
         self.write(minifed_fname, minified_data)
 
-        compresslevel = 9 # max
-        buffer = StringIO.StringIO()
-        with gzip.GzipFile(fileobj=buffer, mode='wb',
-                           compresslevel=compresslevel) as fout:
-            fout.write(minified_data)
-        gzipped_data = buffer.getvalue()
+        gzipped_data = self._compress(minified_data)
         gzipped_fname = fname_template.format(suffix='.min', gz='.gz')
         self.write(gzipped_fname, gzipped_data)
 
