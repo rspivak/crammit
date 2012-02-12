@@ -10,7 +10,7 @@
 What the heck is this?
 ======================
 
-`Crammit` is a small tool that provides both CSS and JavaScript
+*Crammit* is a small tool that provides both CSS and JavaScript
 concatenation, compression and some other asset management related
 goodies. If you've heard of Jammit for Rails then you can think of it
 as my attempt to provide a similar simple version in Python.
@@ -35,6 +35,11 @@ To install in development mode
 
     $ git clone https://github.com/rspivak/crammit.git
     $ python setup.py develop
+
+Put it through its paces
+------------------------
+
+    $ crammit -c assets.yaml
 
 License
 -------
