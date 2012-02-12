@@ -70,9 +70,9 @@ Here is a sample configuration file.
         - static/css/*.css
 
 
-**output** - specifies relative path of an output directory where all
+- **output** - specifies relative path of an output directory where all
 generated files will be put.
-**fingerprint** - either true or false. If true then SHA1 hash will be
+- **fingerprint** - either true or false. If true then SHA1 hash will be
 added to output bundle file names. The hash is calculated on
 concatenated original files before minification and gzip compression
 is applied.
