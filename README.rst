@@ -69,6 +69,10 @@ Here is a sample configuration file.
         # you can use Unix shell-style wildcards in file names
         - static/css/*.css
 
+
+**output** - specifies relative path of an output directory where all
+generated files will be put.
+
 Every bundle will output 3 files. Let's check out the output of
 the javascript *common* bundle.
 
