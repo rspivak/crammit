@@ -37,6 +37,7 @@ import yaml
 import slimit
 import cssmin
 
+OUTPUT_DIR = 'assets'
 CONFIG_FILE = 'assets.yaml'
 ASSETS_INFO_FILE = 'assetsinfo.yaml'
 
@@ -98,9 +99,8 @@ class AssetManager(object):
     def _process_bundle(self, name, paths, type):
         sha1, sep = '', ''
         raw_data = ''.join(open(path).read() for path in paths)
-        if self.config['fingerprint']:
-            sha1 = hashlib.sha1(raw_data).hexdigest()
-            sep = '-'
+        if self.config.get('fingerprint'):
+            sha1, sep = hashlib.sha1(raw_data).hexdigest(), '-'
         file_ext = {
             'javascript': '.js',
             'css': '.css',
@@ -138,7 +138,7 @@ class AssetManager(object):
         return bundle_info
 
     def write(self, fname, data):
-        output = os.path.abspath(self.config['output'])
+        output = os.path.abspath(self.config.get('output', OUTPUT_DIR))
         if not os.path.exists(output):
             os.makedirs(output)
         path = os.path.join(output, fname)
