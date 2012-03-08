@@ -51,6 +51,21 @@ def load_config(path):
     return yaml.load(open(path))
 
 
+class GzipFilePython26(gzip.GzipFile):
+    def __enter__(self):
+        if self.fileobj is None:
+            raise ValueError("I/O operation on closed GzipFile object")
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+
+GzipFileClass = gzip.GzipFile
+if sys.version_info < (2, 7):
+    GzipFileClass = GzipFilePython26
+
+
 class AssetManager(object):
     """I manage assets bundles."""
     def __init__(self, config, basedir=None):
@@ -94,7 +109,7 @@ class AssetManager(object):
     def _compress(self, data):
         compresslevel = 9 # max
         buffer = StringIO()
-        with gzip.GzipFile(fileobj=buffer, mode='wb',
+        with GzipFileClass(fileobj=buffer, mode='wb',
                            compresslevel=compresslevel) as fout:
             fout.write(data)
         return buffer.getvalue()
