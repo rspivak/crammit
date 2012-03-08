@@ -29,7 +29,12 @@ import fnmatch
 import hashlib
 import sys
 import optparse
-import StringIO
+
+try:
+    from cStringIO import StringIO
+except:
+    from StringIO import StringIO
+
 import gzip
 from collections import defaultdict
 
