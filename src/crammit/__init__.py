@@ -29,14 +29,12 @@ import fnmatch
 import hashlib
 import sys
 import optparse
-
+import gzip
+from collections import defaultdict
 try:
     from cStringIO import StringIO
 except:
     from StringIO import StringIO
-
-import gzip
-from collections import defaultdict
 
 import yaml
 import slimit
