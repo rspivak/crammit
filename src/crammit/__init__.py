@@ -44,26 +44,25 @@ OUTPUT_DIR = 'assets'
 CONFIG_FILE = 'assets.yaml'
 ASSETS_INFO_FILE = 'assetsinfo.yaml'
 
+
 def _log(msg):
     sys.stderr.write('%s\n' % msg)
 
 def load_config(path):
     return yaml.load(open(path))
 
+if sys.version < (2, 7):
+    # 'with' statement support for Python 2.6
+    class GzipFile(gzip.GzipFile):
+        def __enter__(self):
+            if self.fileobj is None:
+                raise ValueError('I/O operation on closed GzipFile object')
+            return self
 
-class GzipFilePython26(gzip.GzipFile):
-    def __enter__(self):
-        if self.fileobj is None:
-            raise ValueError("I/O operation on closed GzipFile object")
-        return self
-
-    def __exit__(self, *args):
-        self.close()
-
-
-GzipFileClass = gzip.GzipFile
-if sys.version_info < (2, 7):
-    GzipFileClass = GzipFilePython26
+        def __exit__(self, *args):
+            self.close()
+else:
+    GzipFile = gzip.GzipFile
 
 
 class AssetManager(object):
@@ -109,8 +108,8 @@ class AssetManager(object):
     def _compress(self, data):
         compresslevel = 9 # max
         buffer = StringIO()
-        with GzipFileClass(fileobj=buffer, mode='wb',
-                           compresslevel=compresslevel) as fout:
+        with GzipFile(fileobj=buffer, mode='wb',
+                      compresslevel=compresslevel) as fout:
             fout.write(data)
         return buffer.getvalue()
 
