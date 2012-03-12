@@ -139,12 +139,12 @@ class AssetManager(object):
 
         bundle_info = {
             name: {
+                'files': paths,
                 'fingerprint': sha1,
                 'output': {
                     'raw': raw_fname,
                     'min': minifed_fname,
                     'gz': gzipped_fname,
-                    'files': paths,
                     },
                 'size': {
                     'raw': len(raw_data),
