@@ -17,7 +17,7 @@ def read(*rel_names):
 
 setup(
     name='crammit',
-    version='0.2',
+    version='0.3',
     url='https://github.com/rspivak/crammit.git',
     license='MIT',
     description=('Asset packaging library. '
