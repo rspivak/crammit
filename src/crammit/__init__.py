@@ -33,7 +33,7 @@ import gzip
 from collections import defaultdict
 try:
     from cStringIO import StringIO
-except:
+except ImportError:
     from StringIO import StringIO
 
 import yaml
