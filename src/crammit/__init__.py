@@ -144,6 +144,7 @@ class AssetManager(object):
                     'raw': raw_fname,
                     'min': minifed_fname,
                     'gz': gzipped_fname,
+                    'files': paths,
                     },
                 'size': {
                     'raw': len(raw_data),
