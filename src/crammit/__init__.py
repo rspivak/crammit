@@ -127,7 +127,9 @@ class AssetManager(object):
         self.write(raw_fname, raw_data)
 
         if type == 'javascript':
-            minified_data = slimit.minify(raw_data, mangle=True)
+            options = self.config.get(
+                'js_minifier_options', {'mangle': True})
+            minified_data = slimit.minify(raw_data, **options)
         elif type == 'css':
             minified_data = cssmin.cssmin(raw_data)
         minifed_fname = fname_template.format(suffix='.min', gz='')

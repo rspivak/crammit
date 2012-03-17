@@ -1,5 +1,8 @@
 output: assets       # directory path relative to the current directory
 fingerprint: true    # add sha1 hash to the output file name
+js_minifier_options: # options dictionary to configure JS minifier
+  mangle: True
+  mangle_toplevel: True
 
 javascript:
   # 'common' is a bundle name
