@@ -119,14 +119,14 @@ class AssetManagerTestCase(unittest.TestCase):
         css:
           common:
             files:
-              - static/css/test2.css
               - static/css/test1.css
-            fingerprint: 71fe4cba05a1a51023c6af4c4abf9c47ab21e357
+              - static/css/test2.css
+            fingerprint: 30bb64bb4cb1b9620066398df4852f6a2ceec8c5
             output:
-              gz: common-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.min.css.gz
-              min: common-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.min.css
-              raw: common-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.css
-            size: {gz: 108, min: 235, raw: 277}
+              gz: common-30bb64bb4cb1b9620066398df4852f6a2ceec8c5.min.css.gz
+              min: common-30bb64bb4cb1b9620066398df4852f6a2ceec8c5.min.css
+              raw: common-30bb64bb4cb1b9620066398df4852f6a2ceec8c5.css
+            size: {gz: 106, min: 235, raw: 277}
         javascript:
           common:
             files:
@@ -151,5 +151,6 @@ class AssetManagerTestCase(unittest.TestCase):
         """)
 
         bundles_info = manager.process_bundles()
+
         self.assertEqual(expected, bundles_info)
 

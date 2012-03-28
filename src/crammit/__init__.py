@@ -100,7 +100,7 @@ class AssetManager(object):
                 fnames = [os.path.join(assetdir, fname)
                           for fname in os.listdir(assetdir)]
                 expanded_fnames = fnmatch.filter(fnames, pattern)
-                bundle_files.extend(expanded_fnames)
+                bundle_files.extend(sorted(expanded_fnames))
             bundles[bundle_name] = bundle_files
 
         return bundles
