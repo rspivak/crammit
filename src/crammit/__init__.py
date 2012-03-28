@@ -141,7 +141,7 @@ class AssetManager(object):
 
         bundle_info = {
             name: {
-                'files': paths,
+                'files': [os.path.relpath(p, self.basedir) for p in paths],
                 'fingerprint': sha1,
                 'output': {
                     'raw': raw_fname,
