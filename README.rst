@@ -54,6 +54,9 @@ Here is a sample configuration file.
 
     output: assets       # directory path relative to the current directory
     fingerprint: true    # add sha1 hash to the output file name
+
+    js_minifier: ...     # optionally use a minifier other than slimit.
+                         # expects a shell command that uses stdin/stdout.
     js_minifier_options: # options dictionary to configure JS minifier
       mangle: True
       mangle_toplevel: True
