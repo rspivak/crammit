@@ -99,8 +99,8 @@ output file names and their corresponding sizes in bytes.
     css:
       base:
         files:
-        - /home/rspivak/static/css/test1.css
-        - /home/rspivak/static/css/test2.css
+        - static/css/test1.css
+        - static/css/test2.css
         fingerprint: 71fe4cba05a1a51023c6af4c4abf9c47ab21e357
         output:
           gz: base-71fe4cba05a1a51023c6af4c4abf9c47ab21e357.min.css.gz
@@ -113,9 +113,9 @@ output file names and their corresponding sizes in bytes.
     javascript:
       common:
         files:
-        - /home/rspivak/static/js/application.js
-        - /home/rspivak/static/js/vendor/vendor1.js
-        - /home/rspivak/static/js/vendor/vendor2.js
+        - static/js/application.js
+        - static/js/vendor/vendor1.js
+        - static/js/vendor/vendor2.js
         fingerprint: 6493b619c73c49ce1f4dfe2c31d41902e98acaee
         output:
           gz: common-6493b619c73c49ce1f4dfe2c31d41902e98acaee.min.js.gz
@@ -127,7 +127,7 @@ output file names and their corresponding sizes in bytes.
           raw: 50
       utils:
         files:
-        - /home/rspivak/static/js/utils.js
+        - static/js/utils.js
         fingerprint: c3ef63280b954d99e8b13fc11ea3031caee77f1a
         output:
           gz: utils-c3ef63280b954d99e8b13fc11ea3031caee77f1a.min.js.gz
