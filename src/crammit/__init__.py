@@ -128,8 +128,8 @@ class AssetManager(object):
         self.write(raw_fname, raw_data)
 
         if type == 'javascript':
-            custom = self.config.get('js_minifier', None)
-            if custom:
+            custom = self.config.get('js_minifier')
+            if custom is not None:
                 minified_data = envoy.run(custom, data=raw_data).std_out
             else:
                 options = self.config.get(
