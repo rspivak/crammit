@@ -30,6 +30,7 @@ import hashlib
 import sys
 import optparse
 import gzip
+import envoy
 from collections import defaultdict
 try:
     from cStringIO import StringIO
@@ -127,9 +128,13 @@ class AssetManager(object):
         self.write(raw_fname, raw_data)
 
         if type == 'javascript':
-            options = self.config.get(
-                'js_minifier_options', {'mangle': True})
-            minified_data = slimit.minify(raw_data, **options)
+            custom = self.config.get('js_minifier', None)
+            if custom:
+                minified_data = envoy.run(custom, data=raw_data).std_out
+            else:
+                options = self.config.get(
+                    'js_minifier_options', {'mangle': True})
+                minified_data = slimit.minify(raw_data, **options)
         elif type == 'css':
             minified_data = cssmin.cssmin(raw_data)
         minifed_fname = fname_template.format(suffix='.min', gz='')
