@@ -30,13 +30,13 @@ import hashlib
 import sys
 import optparse
 import gzip
-import envoy
 from collections import defaultdict
 try:
     from cStringIO import StringIO
 except ImportError:
     from StringIO import StringIO
 
+import envoy
 import yaml
 import slimit
 import cssmin
