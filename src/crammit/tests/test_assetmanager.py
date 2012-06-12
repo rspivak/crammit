@@ -138,7 +138,7 @@ class AssetManagerTestCase(unittest.TestCase):
               min: common-551e83e1705c9b1441413c23391dfebad541ee85.min.js
               gz: common-551e83e1705c9b1441413c23391dfebad541ee85.min.js.gz
               raw: common-551e83e1705c9b1441413c23391dfebad541ee85.js
-            size: {gz: 59, min: 44, raw: 50}
+            size: {gz: 60, min: 46, raw: 50}
           utils:
             files:
               - static/js/utils.js
@@ -153,4 +153,3 @@ class AssetManagerTestCase(unittest.TestCase):
         bundles_info = manager.process_bundles()
 
         self.assertEqual(expected, bundles_info)
-

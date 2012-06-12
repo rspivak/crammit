@@ -115,11 +115,19 @@ class AssetManager(object):
         return buffer.getvalue()
 
     def _concat(self, data, type):
-        return ''.join(data)
+        sep = ''
+        if type == 'javascript'
+            sep = ';'
+
+        return sep.join(data)
 
     def _minify(self, data, type, paths=[]):
+        sep = ''
+
         # figure out how to minify something
         if type == 'javascript':
+            sep = ';'
+
             # use envoy to run the custom command if it's supplied
             custom = self.config.get('js_minifier')
             if custom is not None:
@@ -143,7 +151,7 @@ class AssetManager(object):
 
             return minify(contents)
 
-        minified = ''.join(
+        minified = sep.join(
           [real_minify(path, contents) for path, contents in zip(paths, data)]
         )
 
