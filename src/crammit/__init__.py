@@ -114,53 +114,85 @@ class AssetManager(object):
             fout.write(data)
         return buffer.getvalue()
 
-    def _process_bundle(self, name, paths, type):
-        sha1, sep = '', ''
-        raw_data = ''.join(open(path).read() for path in paths)
-        if self.config.get('fingerprint'):
-            sha1, sep = hashlib.sha1(raw_data).hexdigest(), '-'
-        file_ext = {
-            'javascript': '.js',
-            'css': '.css',
-            }.get(type)
-        fname_template = '%s%s%s{suffix}%s{gz}' % (name, sep, sha1, file_ext)
-        raw_fname = fname_template.format(suffix='', gz='')
-        self.write(raw_fname, raw_data)
+    def _concat(self, data, type):
+        return ''.join(data)
 
+    def _minify(self, data, type, paths=[]):
+        # figure out how to minify something
         if type == 'javascript':
+            # use envoy to run the custom command if it's supplied
             custom = self.config.get('js_minifier')
             if custom is not None:
-                minified_data = envoy.run(custom, data=raw_data).std_out
+                minify = lambda x: envoy.run(custom, data=x).std_out
+
+            # otherwise use slimit
             else:
                 options = self.config.get(
-                    'js_minifier_options', {'mangle': True})
-                minified_data = slimit.minify(raw_data, **options)
-        elif type == 'css':
-            minified_data = cssmin.cssmin(raw_data)
-        minifed_fname = fname_template.format(suffix='.min', gz='')
-        self.write(minifed_fname, minified_data)
+                  'js_minifier_options', {'mangle': True}
+                )
 
-        gzipped_data = self._compress(minified_data)
+                minify = lambda x: slimit.minify(x, **options)
+
+        elif type == 'css':
+            # only one option for css right now
+            minify = cssmin.cssmin
+
+        def real_minify(path, contents):
+            if '.min' in path:
+                return contents
+
+            return minify(contents)
+
+        minified = ''.join(
+          [real_minify(path, contents) for path, contents in zip(paths, data)]
+        )
+
+        return minified
+
+    def _process_bundle(self, name, paths, type):
+        sha1, opt_dash = '', ''
+
+        raw_data = [open(path).read() for path in paths]
+
+        if self.config.get('fingerprint'):
+            sha1 = hashlib.sha1(''.join(raw_data)).hexdigest()
+            opt_dash = '-'
+
+        file_ext = {
+          'javascript': '.js',
+          'css': '.css',
+        }.get(type)
+
+        fname_template = '%s%s%s{suffix}%s{gz}' % (name, opt_dash, sha1, file_ext)
+
+        concat_fname = fname_template.format(suffix='', gz='')
+        concat_data = self._concat(raw_data, type)
+        self.write(concat_fname, concat_data)
+
+        minified_fname = fname_template.format(suffix='.min', gz='')
+        minified_data = self._minify(raw_data, type, paths=paths)
+        self.write(minified_fname, minified_data)
+
         gzipped_fname = fname_template.format(suffix='.min', gz='.gz')
+        gzipped_data = self._compress(minified_data)
         self.write(gzipped_fname, gzipped_data)
 
-        bundle_info = {
+        return {
             name: {
                 'files': [os.path.relpath(p, self.basedir) for p in paths],
                 'fingerprint': sha1,
                 'output': {
-                    'raw': raw_fname,
-                    'min': minifed_fname,
+                    'raw': concat_fname,
+                    'min': minified_fname,
                     'gz': gzipped_fname,
-                    },
+                },
                 'size': {
-                    'raw': len(raw_data),
+                    'raw': len(concat_data),
                     'min': len(minified_data),
                     'gz': len(gzipped_data),
-                    },
-                }
+                },
             }
-        return bundle_info
+        }
 
     def write(self, fname, data):
         output = os.path.abspath(self.config.get('output', OUTPUT_DIR))
