@@ -116,7 +116,7 @@ class AssetManager(object):
 
     def _concat(self, data, type):
         sep = ''
-        if type == 'javascript'
+        if type == 'javascript':
             sep = ';'
 
         return sep.join(data)
