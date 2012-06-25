@@ -1,5 +1,11 @@
 Change History
 ==============
+0.5 (2012-06-24)
+----------------
+- Run custom JS minifier with *js_minifier* option
+- Don't minify files that contain '.min' in their file name
+- Add semicolon between merged JS files for safety
+
 0.4 (2012-03-17)
 ----------------
 - Added *js_minifier_options* configuration directive that specifies
